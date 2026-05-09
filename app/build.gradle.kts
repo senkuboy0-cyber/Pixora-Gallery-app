@@ -52,6 +52,7 @@ dependencies {
     implementation(project(":core-branding"))
     implementation(project(":feature-gallery"))
     implementation(project(":feature-player"))
+    implementation(project(":feature-video"))
     implementation(project(":feature-editor"))
     implementation(project(":feature-settings"))
     implementation(project(":feature-ai"))

@@ -24,6 +24,7 @@ import com.pixora.feature.editor.EditorConsole
 import com.pixora.feature.gallery.GalleryHome
 import com.pixora.feature.player.CinematicPlayerPanel
 import com.pixora.feature.settings.SettingsConsole
+import com.pixora.feature.video.VideoTimelinePanel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -44,6 +45,7 @@ private fun PixoraApp() {
                 GalleryHome()
                 CinematicPlayerPanel()
                 EditorConsole()
+                VideoTimelinePanel()
                 AiStudioPanel()
                 SettingsConsole()
             }
