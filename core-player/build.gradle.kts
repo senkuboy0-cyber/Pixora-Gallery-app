@@ -7,4 +7,4 @@ android { namespace = "com.pixora.core.player"; compileSdk = 35
     buildFeatures { compose = true }
 }
 
-dependencies { implementation(project(":core")); implementation(platform(libs.compose.bom)); implementation(libs.compose.ui); implementation(libs.media3.exoplayer); implementation(libs.media3.ui) }
+dependencies { implementation(project(":core")); implementation(platform(libs.compose.bom)); implementation(libs.compose.ui); implementation(libs.media3.exoplayer); implementation(libs.media3.ui); implementation(libs.kotlinx.coroutines.core) }

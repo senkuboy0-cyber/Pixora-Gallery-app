@@ -6,4 +6,4 @@ android { namespace = "com.pixora.core.database"; compileSdk = 35
     kotlinOptions { jvmTarget = "17" }
 }
 
-dependencies { implementation(project(":core")); implementation(libs.room.runtime); implementation(libs.room.ktx); ksp(libs.room.compiler) }
+dependencies { implementation(project(":core")); implementation(libs.room.runtime); implementation(libs.room.ktx); implementation(libs.kotlinx.coroutines.core); ksp(libs.room.compiler) }

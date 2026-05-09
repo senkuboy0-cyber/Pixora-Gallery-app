@@ -2,6 +2,7 @@ package com.pixora.feature.settings
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -14,6 +15,7 @@ import com.pixora.core.design.PixoraFont
 import com.pixora.core.ui.GlassSurface
 import com.pixora.core.ui.SectionTitle
 
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun SettingsConsole() {
     val settings = listOf("Animation", "Typography", "Blur", "AI Providers", "Decoder", "Subtitles", "Cache", "Privacy", "Developer", "Experimental", "Accessibility")

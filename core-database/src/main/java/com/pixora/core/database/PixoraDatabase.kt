@@ -22,5 +22,5 @@ interface MediaAssetDao {
     suspend fun upsertAll(assets: List<MediaAssetEntity>)
 }
 
-@Database(entities = [MediaAssetEntity::class], version = 1, exportSchema = true)
+@Database(entities = [MediaAssetEntity::class], version = 1, exportSchema = false)
 abstract class PixoraDatabase : RoomDatabase() { abstract fun mediaAssetDao(): MediaAssetDao }
