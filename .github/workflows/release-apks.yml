@@ -1,0 +1,68 @@
+name: Release APKs
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Release version, for example 0.1.0
+        required: false
+        default: ''
+  push:
+    branches: [ main ]
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    name: Build and publish APK release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Java 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Set up Gradle cache
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: Make Gradle launcher executable
+        run: chmod +x ./gradlew
+
+      - name: Build all APK outputs
+        run: ./gradlew assembleDebug assembleRelease --stacktrace
+
+      - name: Compute release tag
+        id: tag
+        shell: bash
+        run: |
+          VERSION="${{ github.event.inputs.version }}"
+          if [ -z "$VERSION" ]; then VERSION="0.1.${{ github.run_number }}"; fi
+          echo "tag=v$VERSION" >> "$GITHUB_OUTPUT"
+
+      - name: Create Git tag
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git tag "${{ steps.tag.outputs.tag }}"
+          git push origin "${{ steps.tag.outputs.tag }}"
+
+      - name: Publish GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.tag.outputs.tag }}
+          name: Pixora Gallery ${{ steps.tag.outputs.tag }}
+          body: |
+            Automated Pixora Gallery Android release.
+
+            Includes debug, release, ABI split, and universal APK outputs discovered from app/build/outputs/apk/**/*.apk.
+          files: app/build/outputs/apk/**/*.apk
